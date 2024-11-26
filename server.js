@@ -1,27 +1,41 @@
 const express = require('express');
+const axios = require('axios')
+const pLimit = require('p-limit')
+require('dotenv').config()
+
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+const limit = pLimit(1)
+
 // CONFIGURATION / MIDDLEWARE
-require('dotenv').config()
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-// Root
-app.get('/', (req, res) => {
+// Function to fetch data with rate limiting
+async function fetchData() {
+  const URL_BASE = ('https://collectionapi.metmuseum.org/public/collection/v1/objects')
+
   try {
-    res.status(200).json({
-      message: 'Welcome to the Tour API'
-    })
+    const response = await limit(() => axios.get(URL_BASE))
+    return response.data
   } catch (error) {
-    console.error('Error to get:', error.message)
-    res.status(500).send('Internal Server Error!')
+    console.error('Error Fetching Data', error.message)
+    return null
+  }
+}
+
+
+// Root
+app.get('/api', async (req, res) => {
+  try {
+    const data = await fetchData
+    res.json(data)
+  } catch (error) {
+    console.error('Error fetching API data', error.message)
+    res.status(500).send('Internal Server Error')
   }
 })
-
-//  Download_Data Controller
-// const downloadData = require('./controllers/download_data.js')
-// app.use('/data', downloadData)
 
 app.listen(PORT, () => {
   console.log(`Server running at 🙊 🙉 🙈 http://localhost:${PORT}/`);
