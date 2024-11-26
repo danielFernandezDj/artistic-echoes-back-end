@@ -8,7 +8,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 // Root
-app.get('/api', (req, res) => {
+app.get('/', (req, res) => {
   try {
     res.status(200).json({
       message: 'Welcome to the Tour API'
