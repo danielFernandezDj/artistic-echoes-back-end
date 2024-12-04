@@ -1,42 +1,25 @@
-const express = require('express');
-const axios = require('axios')
-const pLimit = require('p-limit')
-require('dotenv').config()
-
+const express = require('express')
 const app = express();
 const PORT = process.env.PORT || 4000;
+const axios = require('axios')
+require('dotenv').config()
 
-const limit = pLimit(1)
 
 // CONFIGURATION / MIDDLEWARE
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-// Function to fetch data with rate limiting
-async function fetchData() {
-  const URL_BASE = ('https://collectionapi.metmuseum.org/public/collection/v1/objects')
+// Museum API
+const URL_BASE = axios.get('https://collectionapi.metmuseum.org/public/collection/v1/objects')
 
-  try {
-    const response = await limit(() => axios.get(URL_BASE))
-    return response.data
-  } catch (error) {
-    console.error('Error Fetching Data', error.message)
-    return null
-  }
-}
-
-
-// Root
-app.get('/api', async (req, res) => {
-  try {
-    const data = await fetchData
-    res.json(data)
-  } catch (error) {
-    console.error('Error fetching API data', error.message)
-    res.status(500).send('Internal Server Error')
-  }
+app.get('/', (req, res) => {
+  res.send('Hello, you are in the main root. ')
 })
 
 app.listen(PORT, () => {
-  console.log(`Server running at 🙊 🙉 🙈 http://localhost:${PORT}/`);
+  try {
+    console.log(`Server running at 🙊 🙉 🙈 http://localhost:${PORT}/`);
+  } catch (error) {
+    console.error(`The ${PORT} is not working 🙊 🙉 🙈, ${error}`)
+  }
 });

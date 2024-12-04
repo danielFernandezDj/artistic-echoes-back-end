@@ -1,18 +1,21 @@
 {
   "name": "artistic-echoes-back-end",
   "version": "1.0.0",
-  "description": "",
+  "description": "Node.js, Express, and MongoDB REST CRUD API",
+  "type": "commonjs",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
-  "license": "",
+  "author": "Daniel Fernandez",
+  "license": "MIT",
   "dependencies": {
     "axios": "^1.7.7",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
-    "p-limit": "^6.1.0"
+    "mongodb": "^6.11.0"
   }
 }
