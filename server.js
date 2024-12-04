@@ -4,15 +4,22 @@ const PORT = process.env.PORT || 4000;
 const axios = require('axios')
 require('dotenv').config()
 
+// Museum API
+const MUSEUM_URL_BASE = axios.get('https://collectionapi.metmuseum.org/public/collection/v1/objects')
+
 // CONFIGURATION / MIDDLEWARE
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-// Museum API
-const MUSEUM_URL_BASE = axios.get('https://collectionapi.metmuseum.org/public/collection/v1/objects')
+// Set pug has the view engine 
+app.set('view engine', 'pug')
+app.set('views', './views')
 
+
+// Routs
 app.get('/', (req, res) => {
-  res.send('Hello, you are in the main root. ')
+  res.render('./index')
+  // res.send('Hello, you are in the index root. ')
 })
 
 app.listen(PORT, () => {

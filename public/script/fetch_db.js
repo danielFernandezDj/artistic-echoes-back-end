@@ -2,5 +2,4 @@ const MUSEUM_URL_BASE = axios.get('https://collectionapi.metmuseum.org/public/co
 
 async function FetchData () {
     const data = MUSEUM_URL_BASE
-    await 
 }
