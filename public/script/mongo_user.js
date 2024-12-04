@@ -11,6 +11,10 @@ const client = new MongoClient(Data_Base_Uri, {
     }
 })
 
+const first_schema = {
+
+}
+
 async function run() {
     try {
         // Connect the client to the server	(optional starting in v4.7)

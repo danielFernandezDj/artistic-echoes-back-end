@@ -4,13 +4,12 @@ const PORT = process.env.PORT || 4000;
 const axios = require('axios')
 require('dotenv').config()
 
-
 // CONFIGURATION / MIDDLEWARE
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 // Museum API
-const URL_BASE = axios.get('https://collectionapi.metmuseum.org/public/collection/v1/objects')
+const MUSEUM_URL_BASE = axios.get('https://collectionapi.metmuseum.org/public/collection/v1/objects')
 
 app.get('/', (req, res) => {
   res.send('Hello, you are in the main root. ')
