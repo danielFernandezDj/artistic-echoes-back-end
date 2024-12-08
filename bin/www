@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 
-const app = require('../app'); // Import the app
-const http = require('http');
+const app = require('../app')
+const http = require('http')
 
-// Get port from environment and store it in Express
 const PORT = process.env.PORT || 4000
 
 // Create HTTP server
@@ -11,8 +10,8 @@ const server = http.createServer(app)
 
 server.listen(PORT, () => {
     try {
-        console.log(`Server running at 🙊 🙉 🙈 http://localhost:${PORT}/`);
+        console.log(`Server running at 🙊 🙉 🙈 http://localhost:${PORT}/`)
     } catch (error) {
-        console.error(`The ${PORT} is not working 🙊 🙉 🙈, ${error}`);
+        console.error(`The ${PORT} is not working 🙊 🙉 🙈, ${error}`)
     }
 })
